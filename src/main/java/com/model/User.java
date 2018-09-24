@@ -1,9 +1,7 @@
 package com.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.joda.time.DateTime;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -16,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "USERS")
-public class User extends BaseModel implements UserDetails {
+public class User extends BaseModel {
 
     @Column(name = "username")
     private String username;
@@ -64,12 +62,6 @@ public class User extends BaseModel implements UserDetails {
         return password;
     }
 
-    public void setPassword(String password) {
-        Timestamp now = new Timestamp(DateTime.now().getMillis());
-        this.setLastPasswordResetDate(now);
-        this.password = password;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -90,10 +82,7 @@ public class User extends BaseModel implements UserDetails {
         this.authorities = authorities;
     }
 
-    @Override
-    public List<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
-    }
+
 
     public String getEmail() {
         return email;
@@ -111,10 +100,6 @@ public class User extends BaseModel implements UserDetails {
         this.phoneNumber = phoneNumber;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
@@ -134,24 +119,6 @@ public class User extends BaseModel implements UserDetails {
 
     public void setQuestionList(List<Question> questionList) {
         this.questionList = questionList;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
     }
 
 }
