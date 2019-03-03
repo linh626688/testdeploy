@@ -12,7 +12,7 @@ public class DemoApplication {
     @RequestMapping("/hello")
     @ResponseBody
     String home() {
-        return "Hello World!";
+        return "1196346994";
     }
 
     @RequestMapping(value = "/helloWorld", method = RequestMethod.GET)
